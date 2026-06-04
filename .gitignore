@@ -1,0 +1,33 @@
+# Ignore datasets and images
+**/valid/
+**/test/
+**/images/
+**/labels/
+quality images for inferencing/images/
+**/boot images sample 2/
+**/boot_data
+**/boot_data2
+**/extracted_objects
+**/inference_set 01
+**/more_images
+**/new_person_boot
+**/PPE-Detection-4
+**/ppe-set*/
+**/sample*/
+**/inf_sample/
+**/ppe_objects-*/
+**/inf_results_*/
+**/inf_set*/
+**/predict*/
+
+
+# Ignore model training outputs
+**/runs/
+model_pipeline/runs/
+
+*.jpg
+
+# General ignores
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
