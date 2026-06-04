@@ -24,6 +24,7 @@ quality images for inferencing/images/
 # Ignore model training outputs
 **/runs/
 model_pipeline/runs/
+model_pipeline/face_vector_db
 
 *.jpg
 *.jpeg
