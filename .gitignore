@@ -8,6 +8,25 @@
 **/ppe_objects-*/
 
 
+# Model weights and exported checkpoints (too large for GitHub)
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# Video files
+*.mp4
+*.avi
+*.mov
+
+# Training/prediction image dumps (metrics CSV/YAML in runs/ are still tracked)
+**/runs/**/*.jpg
+**/runs/**/*.jpeg
+**/runs/**/*.png
+model_pipeline/quality images for inferencing 2/
+model_pipeline/comparison_results/
+model_pipeline/out_vid/
+model_pipeline/inf_vid/
 
 # General ignores
 __pycache__/
