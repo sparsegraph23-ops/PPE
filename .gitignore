@@ -1,34 +1,56 @@
-# Ignore datasets and images
-**/valid/
-**/test/
-**/images/
-**/labels/
-**/extracted_objects
-**/PPE-Detection-4
-**/ppe_objects-*/
+# ---------------------------------------------------------------- secrets --
+.env
+*.key
 
+# ------------------------------------------------------------------- data --
+# Datasets are re-downloadable from Roboflow (see data/README.md); the face DB
+# holds biometric data and must never be committed. Keep only the descriptors.
+data/**
+!data/**/
+!data/README.md
+!data/**/README.md
+!data/**/data.yaml
+!data/**/.gitkeep
 
-# Model weights and exported checkpoints (too large for GitHub)
-*.pt
-*.pth
+# ------------------------------------------------------- training artifacts --
+# Keep the experimental record (results.csv, args.yaml, curves) but not the
+# weights or the thousands of train/val batch preview JPGs.
+experiments/**/weights/
+experiments/**/*.jpg
+experiments/**/*.jpeg
+# Curves and confusion matrices are replottable from results.csv, and the
+# headline numbers live in experiments/RESULTS.md. Drop this line (~30 MB) if
+# you want the plots themselves in git, e.g. for a thesis appendix.
+experiments/**/*.png
+
+# ------------------------------------------------------- released weights --
+# ~50 MB each. Excluded until Git LFS is installed (`git lfs install`), at which
+# point .gitattributes takes over and this line can be removed.
+models/**/*.pt
+
+# ---------------------------------------------------------------- outputs --
+# Everything here is regenerable by re-running a notebook.
+outputs/**
+!outputs/**/
+!outputs/**/.gitkeep
+
+# ------------------------------------------------------------- ultralytics --
+runs/
+yolo11*.pt
+yolo26*.pt
 *.onnx
 *.engine
 
-# Video files
-*.mp4
-*.avi
-*.mov
-
-# Training/prediction image dumps (metrics CSV/YAML in runs/ are still tracked)
-**/runs/**/*.jpg
-**/runs/**/*.jpeg
-**/runs/**/*.png
-model_pipeline/quality images for inferencing 2/
-model_pipeline/comparison_results/
-model_pipeline/out_vid/
-model_pipeline/inf_vid/
-
-# General ignores
+# ---------------------------------------------------------------- python --
 __pycache__/
+*.py[cod]
 .ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# ------------------------------------------------------------------- misc --
 .DS_Store
+.idea/
+.vscode/

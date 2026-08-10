@@ -1,0 +1,32 @@
+# Single source of truth for every path in the project.
+# Notebooks load this instead of hardcoding absolute paths, so the repo can be
+# moved or cloned onto another machine without edits.
+#
+# All paths are relative to the repository root, which is resolved at runtime.
+
+models:
+  person: models/person/yolo11l_ep200/best.pt
+  person_video: models/person/yolo26l_ep150/best.pt
+  ppe: models/ppe/yolo11l_ep200/best.pt
+
+data:
+  images_set1: data/external/images/set1
+  images_set2: data/external/images/set2
+  videos: data/external/videos
+  faces: data/external/faces
+  face_db: data/processed/face_db
+  benchmark: data/benchmarks/cascade_testset_v1
+  benchmark_images: data/benchmarks/cascade_testset_v1/test/images
+  benchmark_labels: data/benchmarks/cascade_testset_v1/test/labels
+  benchmark_yaml: data/benchmarks/cascade_testset_v1/data.yaml
+  interim: data/interim
+
+outputs:
+  predictions: outputs/predictions
+  videos: outputs/videos
+  figures: outputs/figures
+  reports: outputs/reports
+
+experiments:
+  person: experiments/person
+  ppe: experiments/ppe

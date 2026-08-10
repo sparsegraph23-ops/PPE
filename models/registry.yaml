@@ -1,0 +1,58 @@
+# Released model weights.
+# Each entry is a copy of the `best.pt` from the training run named in `source_run`,
+# so experiments/ stays self-contained and models/ is the stable inference contract.
+#
+# Metrics are the best epoch of that run on its own validation split
+# (see experiments/RESULTS.md for the full leaderboard).
+
+person:
+  default: yolo11l_ep200
+
+  yolo11l_ep200:
+    path: models/person/yolo11l_ep200/best.pt
+    source_run: experiments/person/yolo11l_ep200
+    backbone: yolo11l.pt
+    epochs: 200
+    imgsz: 640
+    classes: [half_person, person]
+    metrics: {precision: 0.810, recall: 0.766, mAP50: 0.8257, mAP50_95: 0.5684}
+    used_by: [notebooks/20_infer_image.ipynb, notebooks/30_eval_cascade.ipynb]
+
+  yolo26l_ep150:
+    path: models/person/yolo26l_ep150/best.pt
+    source_run: experiments/person/yolo26l_ep150
+    backbone: yolo26l.pt
+    epochs: 150
+    imgsz: 640
+    classes: [half_person, person]
+    metrics: {precision: 0.900, recall: 0.783, mAP50: 0.8642, mAP50_95: 0.5905}
+    used_by: [notebooks/21_infer_video.ipynb]
+    note: >
+      Best person detector overall (mAP50-95 0.5905 vs 0.5684 for yolo11l_ep200).
+      The image and eval notebooks still load yolo11l_ep200, so the reported
+      end-to-end numbers do not reflect this model. Unifying on it is a pending
+      decision, not an oversight -- see docs/architecture.md.
+
+ppe:
+  default: yolo11l_ep200
+
+  yolo11l_ep200:
+    path: models/ppe/yolo11l_ep200/best.pt
+    source_run: experiments/ppe/yolo11l_ep200
+    backbone: yolo11l.pt
+    epochs: 200
+    imgsz: [455, 171]   # (height, width) -- portrait, matches a standing person crop
+    classes: [boot, helmet, jacket]
+    metrics: {precision: 0.899, recall: 0.832, mAP50: 0.8787, mAP50_95: 0.5400}
+    used_by:
+      - notebooks/20_infer_image.ipynb
+      - notebooks/21_infer_video.ipynb
+      - notebooks/30_eval_cascade.ipynb
+
+faces:
+  # face_recognition's bundled dlib ResNet (128-d embeddings) -- no local weight file.
+  # Enrolled embeddings live in data/processed/face_db (ChromaDB).
+  encoder: face_recognition==1.2.3
+  detector: hog
+  embedding_dim: 128
+  metric: cosine

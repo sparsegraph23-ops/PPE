@@ -1,0 +1,10 @@
+# Git LFS -- run `git lfs install && git lfs track` before these take effect.
+# Model weights and demo media are large binaries; keeping them out of the
+# ordinary object store is what keeps a clone reasonable.
+*.pt   filter=lfs diff=lfs merge=lfs -text
+*.pth  filter=lfs diff=lfs merge=lfs -text
+*.mp4  filter=lfs diff=lfs merge=lfs -text
+
+# Notebooks: treat as text so diffs are reviewable, but never auto-merge them.
+*.ipynb -merge
+*.ipynb text eol=lf
